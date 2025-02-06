@@ -1,20 +1,26 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Villa_API.Data;
 using Villa_API.Models;
+using Villa_API.Models.Dto;
 
 namespace Villa_API.Controllers
 {
-    [Route("api/[controller]")]
+    //  [Route("api/[controller]")]
+
+    [Route("api/VillaAPI")]
     [ApiController]
     public class VillaAPIController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<Villa> GetVillas()
+        public IEnumerable<VillaDTO> GetVillas()
         {
-            return new List<Villa> {
-            new Villa{Id=1,Name="Pool View" },
-            new Villa{Id=2,Name="Beach View" }
-            };
+            return VillaStore.villaList;
+        }
+        [HttpGet("{id:int}")]
+        public VillaDTO GetVilla(int id)
+        {
+            return VillaStore.villaList.FirstOrDefault(u => u.Id == id);
         }
     }
 }
