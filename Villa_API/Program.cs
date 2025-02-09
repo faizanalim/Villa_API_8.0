@@ -1,5 +1,7 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Villa_API;
 using Villa_API.Data;
 using Villa_API.Logging;
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option => {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
 builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddControllers(option => {
   //  option.ReturnHttpNotAcceptable = true;
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
