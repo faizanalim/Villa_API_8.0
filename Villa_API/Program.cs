@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Villa_API.Data;
 using Villa_API.Logging;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 //            .WriteTo.File("log/villalogs.txt", rollingInterval: RollingInterval.Month).CreateLogger();
 //builder.Host.UseSerilog();
 
-
+builder.Services.AddDbContext<ApplicationDbContext>(option => {
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
+});
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddControllers(option => {
   //  option.ReturnHttpNotAcceptable = true;
