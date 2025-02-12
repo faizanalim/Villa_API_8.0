@@ -19,6 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option => {
 });
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
+builder.Services.AddScoped<IVillaNumberRepository, VillaNumberRepository>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddControllers(option => {
   //  option.ReturnHttpNotAcceptable = true;
