@@ -5,11 +5,15 @@ using Villa_API.Models.Dto;
 using Villa_API.Models;
 using Villa_API.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
+using Asp.Versioning;
 
 namespace Villa_API.Controllers
 {
-    [Route("api/VillaNumberAPI")]
+    // [Route("api/VillaNumberAPI")]
+    [Route("api/v{version:apiVersion}/VillaNumberAPI")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     public class VillaNumberAPIController : ControllerBase
     {
         protected APIResponse _response;
@@ -27,6 +31,7 @@ namespace Villa_API.Controllers
 
 
         [HttpGet]
+        [MapToApiVersion("1.0")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetVillaNumbers()
         {
@@ -50,10 +55,19 @@ namespace Villa_API.Controllers
 
         }
 
+        [HttpGet]
+        [MapToApiVersion("2.0")]
+        public IEnumerable<string> Get()
+        {
+            return ["value1", "value2"];
+        }
+
         [HttpGet("{id:int}", Name = "GetVillaNumber")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+        
         public async Task<ActionResult<APIResponse>> GetVillaNumber(int id)
         {
             try
