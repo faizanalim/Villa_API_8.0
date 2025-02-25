@@ -11,7 +11,7 @@ using Villa_API.Models;
 using Villa_API.Models.Dto;
 using Villa_API.Repository.IRepository;
 
-namespace Villa_API.Controllers
+namespace Villa_API.Controllers.v1
 {
     //  [Route("api/[controller]")]
 
@@ -27,12 +27,12 @@ namespace Villa_API.Controllers
         {
             _dbVilla = dbVilla;
             _mapper = mapper;
-            this._response = new();
+            _response = new();
         }
 
 
         [HttpGet]
-       
+
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -57,8 +57,8 @@ namespace Villa_API.Controllers
 
         }
 
-        
-        
+
+
         [HttpGet("{id:int}", Name = "GetVilla")]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

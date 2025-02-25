@@ -5,7 +5,7 @@ using Villa_API.Models;
 using Villa_API.Models.Dto;
 using Villa_API.Repository.IRepository;
 
-namespace Villa_API.Controllers
+namespace Villa_API.Controllers.v1
 {
     //[Route("api/UsersAuth")]
     [Route("api/v{version:apiVersion}/UsersAuth")]
@@ -18,7 +18,7 @@ namespace Villa_API.Controllers
         public UsersController(IUserRepository userRepo)
         {
             _userRepo = userRepo;
-            this._response = new();
+            _response = new();
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)

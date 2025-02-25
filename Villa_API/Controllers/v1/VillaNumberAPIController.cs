@@ -7,7 +7,7 @@ using Villa_API.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Asp.Versioning;
 
-namespace Villa_API.Controllers
+namespace Villa_API.Controllers.v1
 {
     // [Route("api/VillaNumberAPI")]
     [Route("api/v{version:apiVersion}/VillaNumberAPI")]
@@ -25,7 +25,7 @@ namespace Villa_API.Controllers
         {
             _dbVillaNumber = dbVillaNumber;
             _mapper = mapper;
-            this._response = new();
+            _response = new();
             _dbVilla = dbVilla;
         }
 
@@ -38,9 +38,9 @@ namespace Villa_API.Controllers
             try
             {
 
-				//IEnumerable<VillaNumber> villaNumberList = await _dbVillaNumber.GetAllAsync();
-				IEnumerable<VillaNumber> villaNumberList = await _dbVillaNumber.GetAllAsync(includeProperties: "Villa");
-				_response.Result = _mapper.Map<List<VillaNumberDTO>>(villaNumberList);
+                //IEnumerable<VillaNumber> villaNumberList = await _dbVillaNumber.GetAllAsync();
+                IEnumerable<VillaNumber> villaNumberList = await _dbVillaNumber.GetAllAsync(includeProperties: "Villa");
+                _response.Result = _mapper.Map<List<VillaNumberDTO>>(villaNumberList);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
 
@@ -67,7 +67,7 @@ namespace Villa_API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
-        
+
         public async Task<ActionResult<APIResponse>> GetVillaNumber(int id)
         {
             try
