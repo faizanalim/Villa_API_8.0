@@ -13,7 +13,7 @@ namespace Villa_API.Controllers.v1
     [Route("api/v{version:apiVersion}/VillaNumberAPI")]
     [ApiController]
     [ApiVersion("1.0")]
-    [ApiVersion("2.0")]
+   // [ApiVersion("2.0")]
     public class VillaNumberAPIController : ControllerBase
     {
         protected APIResponse _response;
@@ -29,6 +29,11 @@ namespace Villa_API.Controllers.v1
             _dbVilla = dbVilla;
         }
 
+        [HttpGet("GetString")]
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "String1", "string2" };
+        }
 
         [HttpGet]
         [MapToApiVersion("1.0")]
@@ -55,12 +60,12 @@ namespace Villa_API.Controllers.v1
 
         }
 
-        [HttpGet]
-        [MapToApiVersion("2.0")]
-        public IEnumerable<string> Get()
-        {
-            return ["value1", "value2"];
-        }
+        //[HttpGet]
+        //[MapToApiVersion("2.0")]
+        //public IEnumerable<string> Get()
+        //{
+        //    return ["value1", "value2"];
+        //}
 
         [HttpGet("{id:int}", Name = "GetVillaNumber")]
         [ProducesResponseType(StatusCodes.Status200OK)]
