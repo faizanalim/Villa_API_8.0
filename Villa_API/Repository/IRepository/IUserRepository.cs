@@ -11,6 +11,6 @@ namespace Villa_API.Repository.IRepository
         Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO);
 
 
-        Task<LocalUser> Register(RegisterationRequestDTO registerationRequestDTO);
+        Task<UserDTO> Register(RegisterationRequestDTO registerationRequestDTO);
     }
 }
